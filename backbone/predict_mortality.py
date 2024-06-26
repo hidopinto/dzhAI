@@ -20,7 +20,6 @@ def load_data() -> pd.DataFrame:
 ### conf
 def create_conf(default_mortality_conf=default_conf):
     conf_copy = default_mortality_conf.copy()
-    # TODO: create conf, set run_cross_validation to False
 
     conf_copy['train']['trainable']['args']['param_grid'] = {}
     conf_copy['train']['trainable']['args']['scoring'] = r2_score_wo_nans
