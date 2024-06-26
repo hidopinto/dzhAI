@@ -56,8 +56,14 @@ class MetabolomicsPredictionObjective:
             **self.fit_kwargs
         )
 
-        preds = self.model.predict(self.val_data)
-        model_score = self.score_func(self.val_label, preds)[1]
+        if self.val_data is not None:
+            score_data = self.val_data
+            score_label = self.val_label
+        else:
+            score_data = self.train_data
+            score_label = self.train_labels
+        preds = self.model.predict(score_data)
+        model_score = self.score_func(score_label, preds)[1]
 
         return model_score
 
