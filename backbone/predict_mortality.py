@@ -14,8 +14,7 @@ BLOOD_TEST_COLUMNS = []
 
 ### load data
 def load_data() -> pd.DataFrame:
-    # TODO: fill in
-    return pd.DataFrame()
+    return pd.read_csv('~/Desktop/SegalLab/dzhAI/Data/cleaned_admission_data.csv')
 
 
 ### conf
@@ -35,7 +34,7 @@ def train_with_blood_tests(data: pd.DataFrame, conf):
     trainable_model = trainable_factory.create()
 
     x = data.drop(columns=[OUTCOME_COL])
-    y = data[OUTCOME_COL]
+    y = data[[OUTCOME_COL]]
     models, _ = train_multi_model(x, y, trainable_model, conf)
 
     return models
@@ -46,8 +45,8 @@ def train_without_blood_tests(data: pd.DataFrame, conf):
     trainable_factory = OptunaLGBMFactory(conf, model_class=lgb.LGBMRegressor)
     trainable_model = trainable_factory.create()
 
-    x = data_without_blood_tests.drop(column=[OUTCOME_COL])
-    y = data_without_blood_tests[OUTCOME_COL]
+    x = data_without_blood_tests.drop(columns=[OUTCOME_COL])
+    y = data_without_blood_tests[[OUTCOME_COL]]
     models, _ = train_multi_model(x, y, trainable_model, conf)
 
     return models
