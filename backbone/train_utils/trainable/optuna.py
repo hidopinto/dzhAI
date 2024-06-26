@@ -98,7 +98,8 @@ class OptunaTrainable(Trainable):
 
     def optimize(self, x, y, val_x=None, val_y=None, **fit_params):
         self.objective.set_train_data(x, y)
-        self.objective.set_val_data(val_x, val_y)
+        if val_y is not None:
+            self.objective.set_val_data(val_x, val_y)
         self.objective.set_fit_args(**fit_params)
 
         num_cores = self.conf['lgbm']['train']['num_cores'] if 'num_cores' in self.conf['lgbm']['train'] else -1
