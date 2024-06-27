@@ -6,7 +6,7 @@ from backbone.predict_mortality import load_data
 
 COLS_TO_NUMERIC = ['HB', 'TLC', 'PLATELETS', 'GLUCOSE', 'UREA', 'CREATININE', 'BNP', 'EF', 'CHEST INFECTION']
 CAT_COLS = ['GENDER', 'RURAL', 'TYPE OF ADMISSION-EMERGENCY/OPD']
-BAD_COLS = ['month year']
+BAD_COLS = ['month year', 'OUTCOME_binary']
 
 
 def main():
