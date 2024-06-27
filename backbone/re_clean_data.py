@@ -26,15 +26,15 @@ def main():
 
     # handle cat cols
     cat_data = pd.get_dummies(data[CAT_COLS])
-    data = pd.concat([data.drop(columns=CAT_COLS), cat_data])
+    data = pd.concat([data.drop(columns=CAT_COLS), cat_data], axis=1)
 
     # final outcome col
     outcome = data['OUTCOME']
-    data['OUTCOME'].isin(['DISCHARGE', 'EXPIRY'])
+    data = data[data['OUTCOME'].isin(['DISCHARGE', 'EXPIRY'])]
     data['OUTCOME'] = (outcome == 'EXPIRY').astype('int')
 
     print('saving re-cleaned data with cat cols')
-    data.to_csv('~../Data/recleaned_admission_data.csv')
+    data.to_csv('../Data/recleaned_admission_data.csv')
 
 
 if __name__ == '__main__':

@@ -7,9 +7,10 @@ from backbone.predict_mortality import load_data, get_train_data, OUTCOME_COL, B
 def calc_shap(model, data):
     x, y = get_train_data(data, [OUTCOME_COL])
 
-    shap_values = shap.TreeExplainer(model).shap_values(x)
+    explainer = shap.TreeExplainer(model)
+    shap_values = explainer.shap_values(x)
 
-    return shap_values
+    return explainer, shap_values
 
 
 def main():
@@ -24,12 +25,12 @@ def main():
     pred_bt_model = joblib.load('../output/models/pred_bt_model.joblib')
 
     print('calculating shap values wo blood test')
-    shap_values_wo_bt = calc_shap(pred_wo_bt_model, data_without_blood_tests)
+    explainer_wo_bt, shap_values_wo_bt = calc_shap(pred_wo_bt_model, data_without_blood_tests)
     print('saving shap values wo blood test')
     joblib.dump(shap_values_wo_bt, '../output/models/shap_values_wo_bt.joblib')
 
     print('calculating shap values with blood test')
-    shap_values_bt = calc_shap(pred_bt_model, data)
+    explainer_bt, shap_values_bt = calc_shap(pred_bt_model, data)
     print('saving shap values with blood test')
     joblib.dump(shap_values_bt, '../output/models/shap_values_bt.joblib')
 
