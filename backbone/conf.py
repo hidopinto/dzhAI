@@ -5,7 +5,7 @@ conf = {
     'lgbm': {
         'train': {
             'direction': 'minimize',
-            'n_trials': 20,
+            'n_trials': 50,
             'early_stopping': {
                 'stopping_rounds': 100
             },

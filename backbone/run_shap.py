@@ -10,6 +10,8 @@ def calc_shap(model, data):
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(x)
 
+    shap.summary_plot(shap_values, x, plot_type='bar')
+
     return explainer, shap_values
 
 
