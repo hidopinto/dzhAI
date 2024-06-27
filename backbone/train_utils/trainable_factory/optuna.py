@@ -15,8 +15,7 @@ class OptunaLGBMFactory(TrainableFactory):
         self.model_class = model_class if model_class is not None else LGBMRegressor
 
         self.additional_fit_params = {
-            "eval_metric": self.scoring_func,
-            "verbose": False,
+            "eval_metric": self.scoring_func
         }
 
     def create(self) -> Trainable:

@@ -30,7 +30,6 @@ class MetabolomicsPredictionObjective:
             'objective': 'regression',
             'metric': 'custom',
             'verbosity': -1,
-            'verbose': -1,
             'boosting_type': 'gbdt',
             # tuner params
             'lambda_l1': trial.suggest_loguniform('lambda_l1', 1e-8, 10.0),
