@@ -14,7 +14,7 @@ BLOOD_TEST_COLUMNS = []
 
 ### load data
 def load_data() -> pd.DataFrame:
-    return pd.read_csv('~/Desktop/SegalLab/dzhAI/Data/recleaned_admission_data.csv', index_col=0)
+    return pd.read_csv('../Data/recleaned_admission_data.csv', index_col=0)
 
 
 ### conf
@@ -67,12 +67,12 @@ def main():
     print('training pred model wo blood tests')
     pred_wo_bt_model = train_without_blood_tests(data, conf)[OUTCOME_COL]
     print('saving pred model wo blood tests')
-    joblib.dump(pred_wo_bt_model.trained_model, '/home/yehduap/Desktop/SegalLab/dzhAI/output/models/pred_wo_bt_model.joblib')
+    joblib.dump(pred_wo_bt_model.trained_model, '../output/models/pred_wo_bt_model.joblib')
 
     print('training pred model with blood tests')
     pred_bt_model = train_with_blood_tests(data, conf)[OUTCOME_COL]
     print('saving pred model with blood tests')
-    joblib.dump(pred_bt_model.trained_model, '/home/yehduap/Desktop/SegalLab/dzhAI/output/models/pred_bt_model.joblib')
+    joblib.dump(pred_bt_model.trained_model, '../output/models/pred_bt_model.joblib')
 
 
 if __name__ == '__main__':

@@ -18,20 +18,20 @@ def main():
     data_without_blood_tests = data.drop(columns=BLOOD_TEST_COLUMNS)
 
     print('loading pred model wo blood tests')
-    pred_wo_bt_model = joblib.load('/home/yehduap/Desktop/SegalLab/dzhAI/output/models/pred_wo_bt_model.joblib')
+    pred_wo_bt_model = joblib.load('../output/models/pred_wo_bt_model.joblib')
 
     print('loading pred model with blood tests')
-    pred_bt_model = joblib.load('/home/yehduap/Desktop/SegalLab/dzhAI/output/models/pred_bt_model.joblib')
+    pred_bt_model = joblib.load('../output/models/pred_bt_model.joblib')
 
     print('calculating shap values wo blood test')
     shap_values_wo_bt = calc_shap(pred_wo_bt_model, data_without_blood_tests)
     print('saving shap values wo blood test')
-    joblib.dump(shap_values_wo_bt, '/home/yehduap/Desktop/SegalLab/dzhAI/output/models/shap_values_wo_bt.joblib')
+    joblib.dump(shap_values_wo_bt, '../output/models/shap_values_wo_bt.joblib')
 
     print('calculating shap values with blood test')
     shap_values_bt = calc_shap(pred_bt_model, data)
     print('saving shap values with blood test')
-    joblib.dump(shap_values_bt, '/home/yehduap/Desktop/SegalLab/dzhAI/output/models/shap_values_bt.joblib')
+    joblib.dump(shap_values_bt, '../output/models/shap_values_bt.joblib')
 
 
 if __name__ == '__main__':

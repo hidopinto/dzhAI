@@ -10,7 +10,7 @@ BAD_COLS = ['month year']
 
 
 def main():
-    data = pd.read_csv('~/Desktop/SegalLab/dzhAI/Data/cleaned_admission_data.csv', index_col=0)
+    data = pd.read_csv('../Data/cleaned_admission_data.csv', index_col=0)
 
     # removes bad cols
     data = data.drop(columns=BAD_COLS)
@@ -34,7 +34,7 @@ def main():
     data['OUTCOME'] = (outcome == 'EXPIRY').astype('int')
 
     print('saving re-cleaned data with cat cols')
-    data.to_csv('~/Desktop/SegalLab/dzhAI/Data/recleaned_admission_data.csv')
+    data.to_csv('~../Data/recleaned_admission_data.csv')
 
 
 if __name__ == '__main__':
