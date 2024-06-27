@@ -27,30 +27,35 @@ def create_conf(default_mortality_conf=default_conf):
     return conf_copy
 
 
+def get_train_data(data, outcome_cols):
+    x = data.drop(columns=outcome_cols)
+    y = data[outcome_cols]
+
+    return x, y
+
+
 ### train funcs
 def train_with_blood_tests(data: pd.DataFrame, conf):
     trainable_factory = OptunaLGBMFactory(conf, model_class=lgb.LGBMRegressor)
     trainable_model = trainable_factory.create()
 
-    x = data.drop(columns=[OUTCOME_COL])
-    y = data[[OUTCOME_COL]]
+    x, y = get_train_data(data, [OUTCOME_COL])
+
     models, _ = train_multi_model(x, y, trainable_model, conf)
 
     return models
 
 
 def train_without_blood_tests(data: pd.DataFrame, conf):
-    data_without_blood_tests = data.drop(columns=BLOOD_TEST_COLUMNS)
     trainable_factory = OptunaLGBMFactory(conf, model_class=lgb.LGBMRegressor)
     trainable_model = trainable_factory.create()
 
-    x = data_without_blood_tests.drop(columns=[OUTCOME_COL])
-    y = data_without_blood_tests[[OUTCOME_COL]]
+    data_without_blood_tests = data.drop(columns=BLOOD_TEST_COLUMNS)
+    x, y = get_train_data(data_without_blood_tests, [OUTCOME_COL])
+
     models, _ = train_multi_model(x, y, trainable_model, conf)
 
     return models
-
-# TODO: add SHAP
 
 
 def main():
