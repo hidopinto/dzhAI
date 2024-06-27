@@ -1,11 +1,11 @@
 import joblib
 import shap
 
-from backbone.predict_mortality import load_data, get_train_data, OUTCOME_COL, BLOOD_TEST_COLUMNS
+from backbone.predict_mortality import load_data, OUTCOME_COL, BLOOD_TEST_COLUMNS
 
 
 def calc_shap(model, data):
-    x, y = get_train_data(data, [OUTCOME_COL])
+    x = data.drop(columns=[OUTCOME_COL])
 
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(x)
